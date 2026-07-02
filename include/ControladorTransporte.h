@@ -10,8 +10,12 @@
 #include "Viagem.h"
 #include "Tipos.h"
 
-class ControladorDeTransito {
+#include "PersistenciaArquivos.h"
+
+class ControladorTransporte {
 private:
+    PersistenciaArquivo persistencia;
+    
     std::vector<Cidade*> cidades;
     std::vector<Trajeto*> trajetos;
     std::vector<Transporte*> transportes;
@@ -23,8 +27,8 @@ private:
     Passageiro* buscarPassageiro(const std::string& nome);
 
 public:
-    ControladorDeTransito();
-    ~ControladorDeTransito();
+    ControladorTransporte();
+    ~ControladorTransporte();
 
     // Métodos de Cadastro
     void cadastrarCidade(std::string nome);
