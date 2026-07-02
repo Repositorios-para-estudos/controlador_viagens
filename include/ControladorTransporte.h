@@ -1,4 +1,5 @@
 #pragma once
+#include <queue>
 #include <vector>
 #include <string>
 
@@ -15,7 +16,7 @@
 class ControladorTransporte {
 private:
     PersistenciaArquivo persistencia;
-    
+
     std::vector<Cidade*> cidades;
     std::vector<Trajeto*> trajetos;
     std::vector<Transporte*> transportes;
@@ -25,6 +26,8 @@ private:
     Cidade* buscarCidade(const std::string& nome);
     Transporte* buscarTransporte(const std::string& nome);
     Passageiro* buscarPassageiro(const std::string& nome);
+
+    std::vector<Trajeto*> calcularMelhorRota(Cidade* origem, Cidade* destino, TipoTerreno tipoTransporte);
 
 public:
     ControladorTransporte();
@@ -41,9 +44,9 @@ public:
     void avancarHoras(int horas);
     
     // Relatórios solicitados no escopo do projeto
-    void relatarEstado();
-    void relatarOndeEstaoPessoas();
-    void relatarOndeEstaoTransportes();
-    void relatarViagensEmAndamento();
-    void relatarCidadesMaisVisitadas();
+    // void relatarEstado();
+    // void relatarOndeEstaoPessoas();
+    // void relatarOndeEstaoTransportes();
+    // void relatarViagensEmAndamento();
+    // void relatarCidadesMaisVisitadas();
 };

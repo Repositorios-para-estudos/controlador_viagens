@@ -13,7 +13,9 @@ void exibirMenu() {
     cout << "2. Cadastrar Transporte\n";
     cout << "3. Cadastrar Trajeto\n";
     cout << "4. Cadastrar Passageiro\n";
-    cout << "5. Relatar Estado Geral\n";
+    cout << "5. Iniciar Viagem\n";
+    cout << "6. Avançar Horas\n";
+    cout << "7. Relatar Estado Geral\n";
     cout << "0. Sair do Sistema\n";
     cout << "----------------------------------------\n";
     cout << "Escolha uma opcao: ";
@@ -98,7 +100,40 @@ int main() {
                 cout << "Passageiro enviado para cadastro!\n";
                 break;
             }
-            // case 5:
+            case 5: {
+                string nomeTransporte, nomeOrigem, nomeDestino;
+                int numPassageiros;
+
+                cout << "Digite o nome do transporte: ";
+                getline(cin, nomeTransporte);
+                cout << "Digite o nome da cidade de origem: ";
+                getline(cin, nomeOrigem);
+                cout << "Digite o nome da cidade de destino: ";
+                getline(cin, nomeDestino);
+                cout << "Digite o numero de passageiros: ";
+                cin >> numPassageiros;
+                cin.ignore(); 
+
+                vector<string> nomesPassageiros(numPassageiros);
+                for (int i = 0; i < numPassageiros; ++i) {
+                    cout << "Digite o nome do passageiro " << (i + 1) << ": ";
+                    getline(cin, nomesPassageiros[i]);
+                }
+
+                controlador.iniciarViagem(nomeTransporte, nomesPassageiros, nomeOrigem, nomeDestino);
+                break;
+            }
+            case 6: {
+                int horas;
+                cout << "Digite o numero de horas a avançar: ";
+                cin >> horas;
+                cin.ignore();
+                
+                controlador.avancarHoras(horas);
+                cout << "Horas avançadas com sucesso!\n";
+                break;
+            }
+            // case 7:
             //     cout << "\n--- Relatorio de Estado ---\n";
             //     controlador.relatarEstado();
             //     break;
