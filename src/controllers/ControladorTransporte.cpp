@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <queue>
 #include <iostream>
 #include <vector>
@@ -218,4 +219,82 @@ void ControladorTransporte::avancarHoras(int horas) {
             v->avancarHoras(horas);
         }
     }
+}
+
+// Relatório 1: Onde estão as pessoas 
+void ControladorTransporte::relatarOndeEstaoPessoas() {
+    std::cout << "\n=== RELATORIO DE PASSAGEIROS ===\n";
+    for (Passageiro* p : passageiros) {
+        if (p->getLocalAtual() != nullptr) {
+            std::cout << "- " << p->getNome() << " esta na cidade de " << p->getLocalAtual()->getNome() << ".\n";
+        } else {
+            // Se o local é nulo, está em trânsito. Precisamos achar em qual viagem.
+            for (Viagem* v : viagens) {
+                if (v->isEmAndamento() && v->temPassageiro(p)) {
+                    std::cout << "- " << p->getNome() << " esta em transito.\n"
+                              << "  Origem: " << v->getCidadeOrigem()->getNome() 
+                              << " | Destino: " << v->getCidadeDestino()->getNome() 
+                              << " | Transporte: " << v->getTransporte()->getNome() << "\n";
+                    break; 
+                }
+            }
+        }
+    }
+}
+
+// Relatório 2: Onde estão os transportes 
+void ControladorTransporte::relatarOndeEstaoTransportes() {
+    std::cout << "\n=== RELATORIO DE TRANSPORTES ===\n";
+    for (Transporte* t : transportes) {
+        if (t->getLocalAtual() != nullptr) {
+            std::cout << "- " << t->getNome() << " esta estacionado em " << t->getLocalAtual()->getNome() << ".\n";
+        } else {
+            std::cout << "- " << t->getNome() << " esta em transito no momento.\n";
+        }
+    }
+}
+
+// Relatório 3: Viagens em andamento 
+void ControladorTransporte::relatarViagensEmAndamento() {
+    std::cout << "\n=== VIAGENS EM ANDAMENTO ===\n";
+    bool encontrou = false;
+    for (Viagem* v : viagens) {
+        if (v->isEmAndamento()) {
+            v->relatarEstado(); // Reaproveitamos o método que você já criou na classe Viagem!
+            std::cout << "-----------------------\n";
+            encontrou = true;
+        }
+    }
+    if (!encontrou) {
+        std::cout << "Nenhuma viagem acontecendo no momento.\n";
+    }
+}
+
+// Relatório 4: Cidades mais visitadas 
+void ControladorTransporte::relatarCidadesMaisVisitadas() {
+    std::cout << "\n=== CIDADES MAIS VISITADAS ===\n";
+    
+    // Criamos uma cópia do vetor para não bagunçar a ordem original
+    std::vector<Cidade*> ranking = cidades; 
+    
+    // Expressão Lambda para ordenar o vetor do maior número de visitas para o menor
+    std::sort(ranking.begin(), ranking.end(), [](Cidade* a, Cidade* b) {
+        return a->getVisitas() > b->getVisitas(); 
+    });
+
+    // Imprime o Top 3 (ou menos, se houver menos cidades)
+    int limite = std::min((int)ranking.size(), 3);
+    for (int i = 0; i < limite; ++i) {
+        if (ranking[i]->getVisitas() > 0) {
+            std::cout << i + 1 << ". " << ranking[i]->getNome() << " - " << ranking[i]->getVisitas() << " visitas\n";
+        }
+    }
+}
+
+// Relatório Geral
+void ControladorTransporte::relatarEstado() {
+    relatarOndeEstaoPessoas();
+    relatarOndeEstaoTransportes();
+    relatarViagensEmAndamento();
+    relatarCidadesMaisVisitadas();
 }

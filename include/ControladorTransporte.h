@@ -44,9 +44,9 @@ public:
     void avancarHoras(int horas);
     
     // Relatórios solicitados no escopo do projeto
-    // void relatarEstado();
-    // void relatarOndeEstaoPessoas();
-    // void relatarOndeEstaoTransportes();
-    // void relatarViagensEmAndamento();
-    // void relatarCidadesMaisVisitadas();
+    void relatarEstado();
+    void relatarOndeEstaoPessoas();
+    void relatarOndeEstaoTransportes();
+    void relatarViagensEmAndamento();
+    void relatarCidadesMaisVisitadas();
 };

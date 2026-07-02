@@ -26,6 +26,10 @@ public:
     void relatarEstado();
     bool isEmAndamento();
     
+    Transporte* getTransporte();
+    Cidade* getCidadeOrigem();
+    Cidade* getCidadeDestino();
+    bool temPassageiro(Passageiro* p);
 
     void setProximaViagem(Viagem* proximaViagem);
     Viagem* getProximaViagem();

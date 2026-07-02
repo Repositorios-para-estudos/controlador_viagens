@@ -128,15 +128,15 @@ int main() {
                 cout << "Digite o numero de horas a avançar: ";
                 cin >> horas;
                 cin.ignore();
-                
+
                 controlador.avancarHoras(horas);
                 cout << "Horas avançadas com sucesso!\n";
                 break;
             }
-            // case 7:
-            //     cout << "\n--- Relatorio de Estado ---\n";
-            //     controlador.relatarEstado();
-            //     break;
+            case 7:
+                cout << "\n--- Relatorio de Estado ---\n";
+                controlador.relatarEstado();
+                break;
             case 0:
                 cout << "Encerrando o sistema. Ate logo!\n";
                 break;

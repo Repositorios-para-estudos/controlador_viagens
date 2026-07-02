@@ -65,6 +65,25 @@ bool Viagem::isEmAndamento() {
     return emAndamento;
 }
 
+Transporte* Viagem::getTransporte() {
+    return transporte;
+}
+
+Cidade* Viagem::getCidadeOrigem() {
+    return cidadeOrigem;
+}
+
+Cidade* Viagem::getCidadeDestino() {
+    return cidadeDestino;
+}
+
+bool Viagem::temPassageiro(Passageiro* pBusca) {
+    for (Passageiro* p : passageiros) {
+        if (p == pBusca) return true;
+    }
+    return false;
+}
+
 void Viagem::setProximaViagem(Viagem* proximaViagem) {
     this->proximaViagem = proximaViagem;
 }
@@ -88,5 +107,6 @@ void Viagem::finalizarViagem() {
         for (auto passageiro : passageiros) {
             passageiro->setLocalAtual(cidadeDestino);
         }
+        cidadeDestino->registrarVisita();
     }
 }
