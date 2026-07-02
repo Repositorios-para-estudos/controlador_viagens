@@ -39,3 +39,6 @@
 
 # Executável
 controlador_viagens
+
+# Arquivos de persistência
+*.txt
